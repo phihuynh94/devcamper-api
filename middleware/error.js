@@ -10,10 +10,7 @@ const errorHandler = (err, req, res, next) => {
 
   // Mongoose bad ObjectId
   if (err.name === 'CastError') {
-    error = new ErrorResponse(
-      `Resource not found with id of ${err.value}`,
-      404
-    );
+    error = new ErrorResponse(`Resource not found`, 404);
   }
 
   // Mongoose duplicate key
@@ -31,7 +28,7 @@ const errorHandler = (err, req, res, next) => {
 
   // Jwt not authorization error
   if (err.name === 'JsonWebTokenError') {
-    error = new ErrorResponse('Not authorize to access this route', 401);
+    error = new ErrorResponse('Not authorized to access this route', 401);
   }
 
   // Token expired error
